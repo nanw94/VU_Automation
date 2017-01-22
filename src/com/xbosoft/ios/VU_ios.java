@@ -1,4 +1,4 @@
-package com.xbosoft.android;
+package com.xbosoft.ios;
 
 import java.io.File;
 import java.io.IOException;
