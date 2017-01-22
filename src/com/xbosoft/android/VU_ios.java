@@ -18,6 +18,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -30,6 +31,7 @@ import com.xbosoft.automation.Util_VU;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 
 import org.openqa.selenium.JavascriptExecutor;
@@ -37,7 +39,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import pageFactory.AccountPage;
 import pageFactory.SignInPage;
 
-public class VU_Android {
+public class VU_ios {
 	private WebDriver driver;
 	private String scrFolder;
 	public String url;
@@ -62,35 +64,23 @@ public class VU_Android {
 		// Set Chrome driver
 		System.setProperty("webdriver.chrome.driver", Util_VU.ChromedriverPath);
 
-		// Create object of DesiredCapabilities class and specify android
-		// platform
-		DesiredCapabilities capabilities = DesiredCapabilities.android();
+        // Create Object of DesiredCapability class 
+		DesiredCapabilities capabilities = new DesiredCapabilities();
 
-		// set the capability to execute test in Chrome browser
-		capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, BrowserType.CHROME);
+                // Set the device Name- You can change based on your requirement
+		capabilities.setCapability("deviceName", "iPhone 6");
 
-		// set the capability to execute our test in Android Platform
-		capabilities.setCapability(MobileCapabilityType.PLATFORM, Platform.ANDROID);
+                // Set the platform name- This will ramain same 
+		capabilities.setCapability("platformName", "iOS");
+                 
+                // This the version- it is important so change it if required 
+		capabilities.setCapability("platformVersion", "9.3");
 
-		// we need to define platform name
-		capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
+                // set the browser in Emulator
+		capabilities.setCapability(CapabilityType.BROWSER_NAME, "safari");
 
-		// Set the device name as well (you can give any name)
-		capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "my phone");
-
-		// set the android version as well
-		capabilities.setCapability(MobileCapabilityType.VERSION, "5.0.1");
-
-		// set the android version as well
-		capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, "0");
-
-		// Create object of URL class and specify the appium server address
-		URL url = new URL("http://127.0.0.1:4723/wd/hub");
-
-		// Create object of AndroidDriver class and pass the url and capability
-		// that we created
-		// @SuppressWarnings("rawtypes")
-		driver = new AndroidDriver(url, capabilities);
+                // pass the capability object and start the session
+		IOSDriver driver = new IOSDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 
 		// Setting Wait Time
 		driver.manage().timeouts().implicitlyWait(Util_VU.WAIT_TIME, TimeUnit.SECONDS);
