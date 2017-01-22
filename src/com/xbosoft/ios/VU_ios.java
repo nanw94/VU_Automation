@@ -40,7 +40,7 @@ import pageFactory.AccountPage;
 import pageFactory.SignInPage;
 
 public class VU_ios {
-	private WebDriver driver;
+	private IOSDriver driver;
 	private String scrFolder;
 	public String url;
 	public String currentUserID;
@@ -62,7 +62,7 @@ public class VU_ios {
 	public void setUp() throws Exception {
 
 		// Set Chrome driver
-		System.setProperty("webdriver.chrome.driver", Util_VU.ChromedriverPath);
+		System.setProperty("webdriver.chrome.driver", Util_VU.ChromedriverMac);
 
         // Create Object of DesiredCapability class 
 		DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -78,15 +78,19 @@ public class VU_ios {
 
                 // set the browser in Emulator
 		capabilities.setCapability(CapabilityType.BROWSER_NAME, "safari");
+		
+		URL url = new URL("http://127.0.0.1:4723/wd/hub");
 
-                // pass the capability object and start the session
-		IOSDriver driver = new IOSDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+		// Create object of AndroidDriver class and pass the url and capability
+		// that we created
+		// @SuppressWarnings("rawtypes")
+		driver = new IOSDriver(url, capabilities);
 
 		// Setting Wait Time
 		driver.manage().timeouts().implicitlyWait(Util_VU.WAIT_TIME, TimeUnit.SECONDS);
 
 		// create folder for screenshots
-		scrFolder = "d:/Result/"
+		scrFolder = Util_VU.screenshotPathMac
 				+ new SimpleDateFormat("yyyy_MM_dd_HHmmss").format(Calendar.getInstance().getTime()).toString();
 		new File(scrFolder).mkdir();
 

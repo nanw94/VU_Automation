@@ -18,6 +18,9 @@ public class Util_VU {
 	public static final String GeckodriverPath="D:\\extension\\geckodriver-v0.11.1-win64\\geckodriver.exe";
 	public static final String ChromedriverPath="D:\\extension\\chromedriver_win32\\chromedriver.exe";
 	public static final String ChromedriverMac="/Users/xboadminuser/Documents/workspace/ext/chromedriver";
+	public static final String workspacePath="/Users/xboadminuser/Documents/workspace/";
+	public static final String screenshotPathMac="/Users/xboadminuser/Documents/workspace/result/";
+
 
 
 	
